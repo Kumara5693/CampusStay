@@ -11,6 +11,9 @@ app.use(express.json());
 const userRoutes= require("./routes/userRoutes");
 app.use("/api/users",userRoutes);
 
+const roomRoutes = require("./routes/roomRoutes");
+app.use("/api/rooms", roomRoutes);
+
 const URL = process.env.MONGO_URI;
 mongoose.connect(URL)
  .then(() => {

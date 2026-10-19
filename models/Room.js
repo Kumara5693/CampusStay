@@ -19,6 +19,11 @@ const roomSchema = new mongoose.Schema({
     isAvailable:{
         type: Boolean,
         default:true
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true
     }
 },
 {timestamps:true}

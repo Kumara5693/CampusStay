@@ -31,8 +31,21 @@ router.post("/", protect, upload.array("images", 5), async (req, res) => {
 
 router.get("/", async (req, res) => {
     try {
-        const rooms = await Room.find().populate("owner", "name email phone");
+        const { location, maxPrice } = req.query;
+        
+        let query = {}; 
+        
+        if (location) {
+            query.location = { $regex: location, $options: "i" };
+        }
+        
+        if (maxPrice) {
+            query.price = { $lte: Number(maxPrice) };
+        }
+
+        const rooms = await Room.find(query).populate("owner", "name email phone");
         res.json(rooms);
+
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "Server Error" });

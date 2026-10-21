@@ -31,4 +31,21 @@ router.get("/all", async (req, res) => {
         res.status(500).json({ message: "Error Fetching Rooms", error });
     }
 });
+router.get("/:id", async (req, res) => {
+    try {
+        const room = await Room.findById(req.params.id);
+        
+        if (!room)
+             {
+            return res.status(404).json({ message:"Room not Found!"});
+        }
+        
+        res.status(200).json(room);
+        
+    } catch (error) 
+    {
+        console.log(error);
+        res.status(500).json({ message:"Error fetching the Room", error });
+    }
+});
 module.exports = router;

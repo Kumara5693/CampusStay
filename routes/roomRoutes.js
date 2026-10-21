@@ -20,4 +20,15 @@ router.post("/add", authMiddleware, async (req, res) => {
         res.status(500).json({ message: "Error adding room", error });
     }
 });
+router.get("/all", async (req, res) => {
+    try {
+        const rooms = await Room.find();
+        res.status(200).json(rooms);
+    }
+     catch (error) 
+     {
+        console.log(error);
+        res.status(500).json({ message: "Error Fetching Rooms", error });
+    }
+});
 module.exports = router;

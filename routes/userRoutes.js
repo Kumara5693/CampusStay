@@ -3,23 +3,40 @@ const User= require("../models/User");
 const router = express.Router();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+
 router.post("/register", async (req, res) => {
-    try{
-        const { name, email, password, role } = req.body;
-        const newUser = new User({
+    try {
+        const { name, email, password, role, phone } = req.body;
+
+        if (role === "Owner" && !phone) {
+            return res.status(400).json({ message: "Phone number is required for boarding owners" });
+        }
+        if (!["Student", "Owner", "Admin"].includes(role)) {
+            return res.status(400).json({ message: "Invalid role selected" });
+        }
+
+        let user = await User.findOne({ email });
+        if (user) {
+            return res.status(400).json({ message: "User already exists!" });
+        }
+
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user = new User({
             name,
             email,
-            password,
-            role
+            password: hashedPassword,
+            role,
+            phone: role === "Owner" ? phone : null
         });
-        await newUser.save();
+
+        await user.save();
         res.status(201).json({ message: "User registered successfully!" });
 
-    }
-    catch (error){
+    } catch (error) {
         console.log(error);
-        res.status(500).json({ message: "Error registering user", error });
-
+        res.status(500).json({ message: "Server Error" });
     }
 });
 

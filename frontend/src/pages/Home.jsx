@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './Home.css'; 
 
 function Home() {
   const [rooms, setRooms] = useState([]);
@@ -66,61 +67,65 @@ function Home() {
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h2 style={{ color: 'white' }}>Available Rooms</h2>
+    <div className="home-container">
+      <h2>Available Rooms</h2>
       
-      <form onSubmit={handleSearch} style={{ marginBottom: '20px' }}>
+      <form onSubmit={handleSearch} className="search-container">
         <input 
           type="text" 
           placeholder="Search by Location (e.g. Nugegoda)" 
           value={searchLocation}
           onChange={(e) => setSearchLocation(e.target.value)}
-          style={{ padding: '8px', width: '250px', marginRight: '10px', borderRadius: '4px', border: 'none' }}
+          className="search-input"
         />
-        <button type="submit" style={{ padding: '8px 15px', backgroundColor: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold' }}>
+        <button type="submit" className="search-button">
           Search
         </button>
       </form>
 
-      <div style={{ marginBottom: '20px', padding: '15px', backgroundColor: '#1a1a1a', borderRadius: '8px', display: 'inline-block', border: '1px solid #333' }}>
-        <label style={{ marginRight: '10px', color: 'white' }}>Check-In Date:</label>
+      <div className="date-container">
+        <label>Check-In Date:</label>
         <input 
           type="date" 
           onChange={(e) => setCheckIn(e.target.value)} 
-          style={{ marginRight: '20px', padding: '5px' }} 
+          className="date-input"
         />
         
-        <label style={{ marginRight: '10px', color: 'white' }}>Check-Out Date:</label>
+        <label>Check-Out Date:</label>
         <input 
           type="date" 
           onChange={(e) => setCheckOut(e.target.value)} 
-          style={{ padding: '5px' }} 
+          className="date-input"
         />
       </div>
       
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', marginTop: '10px' }}>
+      <div className="rooms-grid">
         {rooms.length === 0 ? (
-          <p style={{ color: 'white' }}>No rooms found for this location.</p>
+          <p>No rooms found for this location.</p>
         ) : (
           rooms.map((room) => (
-            <div key={room._id} style={{ border: '1px solid #333', padding: '15px', borderRadius: '8px', width: '300px', backgroundColor: '#1a1a1a' }}>
+            <div key={room._id} className="room-card">
               {room.images && room.images.length > 0 && (
-                <img 
-                  src={room.images[0]} 
-                  alt={room.title} 
-                  style={{ width: '100%', height: '200px', objectFit: 'cover', borderRadius: '5px' }} 
-                />
+                <div className="image-container">
+                  <img 
+                    src={room.images[0]} 
+                    alt={room.title} 
+                    className="room-image"
+                  />
+                </div>
               )}
-              <h3 style={{ marginTop: '15px', color: 'white' }}>{room.title}</h3>
-              <p style={{ color: '#ccc' }}><strong>Location:</strong> {room.location}</p>
-              <p style={{ color: '#ccc' }}><strong>Price:</strong> Rs. {room.price}</p>
-              
-              <button 
-                onClick={() => handleBook(room._id)}
-                style={{ backgroundColor: '#3498db', color: 'white', padding: '10px', border: 'none', borderRadius: '5px', cursor: 'pointer', width: '100%', marginTop: '10px', fontWeight: 'bold' }}
-              >
-                Book Now
-              </button>
+              <div className="room-details">
+                <h3 className="room-title">{room.title}</h3>
+                <p className="room-info"><strong>Location:</strong> {room.location}</p>
+                <p className="room-info"><strong>Price:</strong> Rs. {room.price}</p>
+                
+                <button 
+                  onClick={() => handleBook(room._id)}
+                  className="book-button"
+                >
+                  Book Now
+                </button>
+              </div>
             </div>
           ))
         )}

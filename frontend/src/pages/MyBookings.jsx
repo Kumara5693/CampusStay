@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './MyBookings.css'; 
 
 function MyBookings() {
   const [bookings, setBookings] = useState([]);
@@ -23,19 +24,31 @@ function MyBookings() {
   }, []);
 
   return (
-    <div style={{ padding: '20px', color: 'white' }}>
-      <h2>My Bookings</h2>
+    <div className="my-bookings-container">
+      <h2 className="my-bookings-title">My Bookings</h2>
       
       {bookings.length === 0 ? (
-        <p>No bookings found.</p>
+        <p className="no-bookings-msg">No bookings found. Start exploring and book a room!</p>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '15px', marginTop: '20px' }}>
+        <div className="my-bookings-list">
           {bookings.map((booking) => (
-            <div key={booking._id} style={{ border: '1px solid #333', padding: '15px', borderRadius: '8px', backgroundColor: '#1a1a1a', maxWidth: '500px' }}>
-              <h3 style={{ margin: '0 0 10px 0', color: '#3498db' }}>{booking.room.title}</h3>
-              <p style={{ margin: '5px 0' }}><strong>Status:</strong> <span style={{ color: '#f39c12' }}>{booking.status}</span></p>
-              <p style={{ margin: '5px 0' }}><strong>Check-In:</strong> {new Date(booking.checkInDate).toLocaleDateString()}</p>
-              <p style={{ margin: '5px 0' }}><strong>Check-Out:</strong> {new Date(booking.checkOutDate).toLocaleDateString()}</p>
+            <div key={booking._id} className="my-booking-card">
+              <h3 className="my-booking-room-title">{booking.room?.title}</h3>
+              
+              <div className="my-booking-detail">
+                <span className="my-detail-label">Check-In:</span>
+                <span className="my-detail-value">{new Date(booking.checkInDate).toLocaleDateString()}</span>
+              </div>
+              
+              <div className="my-booking-detail">
+                <span className="my-detail-label">Check-Out:</span>
+                <span className="my-detail-value">{new Date(booking.checkOutDate).toLocaleDateString()}</span>
+              </div>
+              
+              <div className="my-booking-detail" style={{ marginTop: '20px' }}>
+                <span className="my-detail-label">Status:</span>
+                <span className="my-status-badge">{booking.status}</span>
+              </div>
             </div>
           ))}
         </div>

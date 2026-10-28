@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import './Login.css'; 
 
 function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -17,7 +16,8 @@ function Login() {
       
       localStorage.setItem('token', response.data.token);
       alert('Login Successful!');
-      navigate('/');
+      
+      window.location.href = '/'; 
       
     } catch (error) {
       console.error('Login error:', error);
@@ -26,29 +26,41 @@ function Login() {
   };
 
   return (
-    <div style={{ maxWidth: '400px', margin: '50px auto', padding: '25px', backgroundColor: '#1a1a1a', borderRadius: '8px', color: 'white', border: '1px solid #333' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Student Login</h2>
-      <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <input 
-          type="email" 
-          placeholder="Email Address" 
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white' }}
-        />
-        <input 
-          type="password" 
-          placeholder="Password" 
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white' }}
-        />
-        <button type="submit" style={{ padding: '12px', backgroundColor: '#3498db', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', marginTop: '10px' }}>
-          Login
-        </button>
-      </form>
+    <div className="login-wrapper">
+      <div className="login-card">
+        <h2 className="login-title">Welcome Back</h2>
+        <p className="login-subtitle">Please login to your CampusStay account</p>
+        
+        <form onSubmit={handleLogin}>
+          <div className="login-group">
+            <label className="login-label">Email Address</label>
+            <input 
+              type="email" 
+              placeholder="Enter your email" 
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="login-input"
+            />
+          </div>
+
+          <div className="login-group">
+            <label className="login-label">Password</label>
+            <input 
+              type="password" 
+              placeholder="Enter your password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="login-input"
+            />
+          </div>
+
+          <button type="submit" className="login-btn">
+            Login
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

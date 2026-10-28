@@ -1,0 +1,87 @@
+/* Page Wrapper to center the Login Card */
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 70vh; /* Centers the card vertically */
+  padding: 20px;
+}
+
+/* Modern Login Card Design */
+.login-card {
+  background-color: #2c3e50;
+  width: 100%;
+  max-width: 420px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-top: 5px solid #3498db; /* Blue accent for Login */
+}
+
+.login-title {
+  color: #fff;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.login-subtitle {
+  text-align: center;
+  color: #bdc3c7;
+  margin-bottom: 30px;
+  font-size: 0.95rem;
+}
+
+/* Form Groups and Inputs */
+.login-group {
+  margin-bottom: 20px;
+}
+
+.login-label {
+  display: block;
+  color: #bdc3c7;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.login-input {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #1a252f;
+  border: 1px solid #34495e;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.login-input:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+/* Submit Button */
+.login-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+
+.login-btn:hover {
+  background-color: #2980b9;
+  transform: translateY(-3px);
+}

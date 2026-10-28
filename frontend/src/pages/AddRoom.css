@@ -1,0 +1,96 @@
+/* Page Wrapper to center the form */
+.add-room-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* Modern Card Design for the Form */
+.add-room-card {
+  background-color: #2c3e50;
+  width: 100%;
+  max-width: 550px;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  border-top: 5px solid #2ecc71; /* Green accent on top */
+}
+
+.add-room-title {
+  color: #fff;
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 0;
+  margin-bottom: 30px;
+  font-weight: 700;
+}
+
+/* Form Groups and Inputs */
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-label {
+  display: block;
+  color: #bdc3c7;
+  margin-bottom: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.form-input, .form-textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background-color: #1a252f;
+  border: 1px solid #34495e;
+  border-radius: 8px;
+  color: white;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.form-input:focus, .form-textarea:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 8px rgba(52, 152, 219, 0.4);
+}
+
+.form-textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+/* File Upload Input */
+.file-input {
+  width: 100%;
+  padding: 10px;
+  background-color: #1a252f;
+  border: 1px dashed #7f8c8d;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+/* Submit Button */
+.submit-btn {
+  width: 100%;
+  padding: 15px;
+  background-color: #2ecc71;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background-color: #27ae60;
+  transform: translateY(-3px);
+}

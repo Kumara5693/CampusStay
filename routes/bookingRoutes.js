@@ -59,4 +59,26 @@ router.delete("/cancel/:id", authMiddleware, async (req, res) => {
         res.status(500).json({ message: "Error cancelling booking", error });
     }
 });
+
+// Get bookings for owner's rooms
+router.get("/owner-bookings", authMiddleware, async (req, res) => {
+    try {
+        // Import Room model if it's not imported at the top
+        const Room = require("../models/Room");
+        
+        // 1. Find all rooms owned by the logged-in user
+        const myRooms = await Room.find({ owner: req.user.id });
+        const roomIds = myRooms.map(room => room._id);
+
+        // 2. Find all bookings that match those room IDs
+        const bookings = await Booking.find({ room: { $in: roomIds } })
+            .populate("room", "title")
+            .populate("user", "name email");
+
+        res.json(bookings);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Server Error" });
+    }
+});
 module.exports = router;

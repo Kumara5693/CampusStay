@@ -1,0 +1,88 @@
+/* Container for the page */
+.my-bookings-container {
+  padding: 30px 40px;
+  color: white;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.my-bookings-title {
+  font-size: 2rem;
+  margin-bottom: 30px;
+  color: #ecf0f1;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  display: inline-block;
+}
+
+/* Empty State Message */
+.no-bookings-msg {
+  font-size: 1.2rem;
+  color: #bdc3c7;
+  background-color: #1a252f;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  border: 1px dashed #34495e;
+}
+
+/* Bookings Grid Layout */
+.my-bookings-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 25px;
+}
+
+/* Individual Booking Card */
+.my-booking-card {
+  background-color: #2c3e50;
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-left: 5px solid #3498db; /* Blue highlight edge for student view */
+}
+
+.my-booking-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+/* Room Title */
+.my-booking-room-title {
+  color: #3498db;
+  margin: 0 0 20px 0;
+  font-size: 1.4rem;
+  border-bottom: 1px solid #34495e;
+  padding-bottom: 10px;
+}
+
+/* Detail Rows */
+.my-booking-detail {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 12px 0;
+  font-size: 1rem;
+}
+
+.my-detail-label {
+  color: #bdc3c7;
+  font-weight: 600;
+}
+
+.my-detail-value {
+  color: #ecf0f1;
+}
+
+/* Status Badge */
+.my-status-badge {
+  background-color: #f39c12;
+  color: white;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}

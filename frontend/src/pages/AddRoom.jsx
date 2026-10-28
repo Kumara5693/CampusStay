@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-
+import './AddRoom.css'; 
 function AddRoom() {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -49,52 +49,74 @@ function AddRoom() {
   };
 
   return (
-    <div style={{ maxWidth: '500px', margin: '40px auto', padding: '25px', backgroundColor: '#1a1a1a', color: 'white', borderRadius: '8px', border: '1px solid #333' }}>
-      <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>Add New Room</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '15px' }}>
-        <input 
-          type="text" 
-          placeholder="Room Title" 
-          value={title} 
-          onChange={(e) => setTitle(e.target.value)} 
-          required 
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white' }} 
-        />
-        <textarea 
-          placeholder="Description" 
-          value={description} 
-          onChange={(e) => setDescription(e.target.value)} 
-          required 
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white', minHeight: '80px' }} 
-        />
-        <input 
-          type="number" 
-          placeholder="Monthly Price (Rs.)" 
-          value={price} 
-          onChange={(e) => setPrice(e.target.value)} 
-          required 
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white' }} 
-        />
-        <input 
-          type="text" 
-          placeholder="Location (e.g. Nugegoda)" 
-          value={location} 
-          onChange={(e) => setLocation(e.target.value)} 
-          required 
-          style={{ padding: '10px', borderRadius: '4px', border: 'none', backgroundColor: '#2c3e50', color: 'white' }} 
-        />
-        <label style={{ fontSize: '14px', color: '#ccc' }}>Upload Room Image:</label>
-        <input 
-          type="file" 
-          accept="image/*" 
-          onChange={(e) => setImage(e.target.files[0])} 
-          required 
-          style={{ padding: '10px', backgroundColor: '#2c3e50', borderRadius: '4px' }} 
-        />
-        <button type="submit" style={{ padding: '12px', backgroundColor: '#2ecc71', color: 'white', border: 'none', borderRadius: '4px', cursor: 'pointer', fontWeight: 'bold', marginTop: '10px' }}>
-          Add Room
-        </button>
-      </form>
+    <div className="add-room-wrapper">
+      <div className="add-room-card">
+        <h2 className="add-room-title">Add New Room</h2>
+        
+        <form onSubmit={handleSubmit}>
+          <div className="form-group">
+            <label className="form-label">Room Title</label>
+            <input 
+              type="text" 
+              placeholder="e.g. Spacious Single Room" 
+              value={title} 
+              onChange={(e) => setTitle(e.target.value)} 
+              required 
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Location</label>
+            <input 
+              type="text" 
+              placeholder="e.g. Nugegoda" 
+              value={location} 
+              onChange={(e) => setLocation(e.target.value)} 
+              required 
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Monthly Price (Rs.)</label>
+            <input 
+              type="number" 
+              placeholder="e.g. 15000" 
+              value={price} 
+              onChange={(e) => setPrice(e.target.value)} 
+              required 
+              className="form-input"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Description</label>
+            <textarea 
+              placeholder="Describe the facilities (e.g. Attached bathroom, free WiFi...)" 
+              value={description} 
+              onChange={(e) => setDescription(e.target.value)} 
+              required 
+              className="form-textarea"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="form-label">Upload Room Image</label>
+            <input 
+              type="file" 
+              accept="image/*" 
+              onChange={(e) => setImage(e.target.files[0])} 
+              required 
+              className="file-input"
+            />
+          </div>
+
+          <button type="submit" className="submit-btn">
+            Add Room
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

@@ -28,9 +28,7 @@ router.post("/add", authMiddleware, async (req, res) => {
 
 router.get("/my-bookings", authMiddleware, async (req, res) => {
     try {
-       
         const bookings = await Booking.find({ user: req.user.id }).populate("room");
-        
         res.status(200).json(bookings);
     }
     catch (error) {
@@ -63,7 +61,6 @@ router.delete("/cancel/:id", authMiddleware, async (req, res) => {
 // Get bookings for owner's rooms
 router.get("/owner-bookings", authMiddleware, async (req, res) => {
     try {
-        // Import Room model if it's not imported at the top
         const Room = require("../models/Room");
         
         // 1. Find all rooms owned by the logged-in user
@@ -81,4 +78,26 @@ router.get("/owner-bookings", authMiddleware, async (req, res) => {
         res.status(500).json({ message: "Server Error" });
     }
 });
+
+// අලුත් Route එක: Owner ට Booking එක Accept හෝ Reject කිරීමට
+router.put("/update-status/:id", authMiddleware, async (req, res) => {
+    try {
+        const { status } = req.body;
+        const booking = await Booking.findById(req.params.id);
+
+        if (!booking) {
+            return res.status(404).json({ message: "Booking not found" });
+        }
+
+        // Update the status
+        booking.status = status;
+        await booking.save();
+
+        res.status(200).json({ message: `Booking marked as ${status}`, booking });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "Error updating booking status", error });
+    }
+});
+
 module.exports = router;

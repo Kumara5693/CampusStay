@@ -15,6 +15,9 @@ function Login() {
       });
       
       localStorage.setItem('token', response.data.token);
+      localStorage.setItem('role', response.data.user.role);
+      localStorage.setItem('email', response.data.user.email);
+      
       alert('Login Successful!');
       
       window.location.href = '/'; 

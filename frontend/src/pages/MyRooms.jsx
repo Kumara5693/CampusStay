@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import './MyRooms.css';
 
 function MyRooms() {
   const [rooms, setRooms] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchMyRooms();
@@ -39,6 +41,11 @@ function MyRooms() {
     }
   };
 
+  const handleEdit = (room) => {
+    // Navigate to edit page and pass the room data
+    navigate(`/edit-room/${room._id}`, { state: { room } });
+  };
+
   return (
     <div className="my-rooms-wrapper">
       <h2 className="my-rooms-header">My Managed Rooms</h2>
@@ -60,7 +67,7 @@ function MyRooms() {
                 <p style={{ color: '#ccc', margin: '5px 0' }}><strong>Price:</strong> Rs. {room.price}</p>
                 
                 <div className="action-buttons">
-                  <button className="edit-btn" onClick={() => alert("Edit Feature!")}>Edit</button>
+                  <button className="edit-btn" onClick={() => handleEdit(room)}>Edit</button>
                   <button className="delete-btn" onClick={() => handleDelete(room._id)}>Delete</button>
                 </div>
               </div>

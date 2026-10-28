@@ -8,13 +8,21 @@ import AddRoom from './pages/AddRoom';
 import OwnerDashboard from './pages/OwnerDashboard';
 import MyRooms from './pages/MyRooms';
 import AdminPanel from './pages/AdminPanel';
+import EditRoom from './pages/EditRoom';
 import './App.css'; 
 
 function App() {
   const token = localStorage.getItem('token');
+  const userRole = localStorage.getItem('role');
+  const userEmail = localStorage.getItem('email');
+
+  // Role and Email identify
+  const isAdmin = userRole === 'Admin' || userEmail === 'kumara@gmail.com';
+  const isOwner = userRole === 'Owner';
+  const isStudent = userRole === 'Student';
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
+    localStorage.clear(); // Token, Role, Email delete
     window.location.href = '/login';
   };
 
@@ -30,11 +38,25 @@ function App() {
           
           {token ? (
             <>
-              <Link to="/admin" className="nav-link" style={{ color: '#f59e0b' }}>Admin Panel</Link>
-              <Link to="/my-bookings" className="nav-link">My Bookings</Link>
-              <Link to="/add-room" className="nav-link">Add Room</Link>
-              <Link to="/my-rooms" className="nav-link">My Rooms</Link>
-              <Link to="/dashboard" className="nav-link">Dashboard</Link>
+              {/* Admin  */}
+              {isAdmin && (
+                <Link to="/admin" className="nav-link" style={{ color: '#f59e0b' }}>Admin Panel</Link>
+              )}
+
+              {/* Students */}
+              {isStudent && (
+                <Link to="/my-bookings" className="nav-link">My Bookings</Link>
+              )}
+
+              {/*Owners */}
+              {isOwner && (
+                <>
+                  <Link to="/add-room" className="nav-link">Add Room</Link>
+                  <Link to="/my-rooms" className="nav-link">My Rooms</Link>
+                  <Link to="/dashboard" className="nav-link">Dashboard</Link>
+                </>
+              )}
+
               <button onClick={handleLogout} className="logout-btn">
                 Logout
               </button>
@@ -49,6 +71,7 @@ function App() {
       </nav>
 
       <Routes>
+        <Route path="/edit-room/:id" element={<EditRoom />} />
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
